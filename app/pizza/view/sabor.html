@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row" ng-init="vm.getSabor()">
+        <form name="formPizza">
+            <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
+                <h2 class=" text-white">Ingredientes</h2>
+                <hr>
+                <div class="responsive">
+                    <i class=" text-white">Para adicionar outros ingredientes clique no campo abaixo</i>
+                    <ui-select 
+                        multiple ng-model="vm.pizza.ingredientes"
+                        required
+                        theme="bootstrap"
+                        id="btn-ui-select" 
+                        sortable="true"
+                        close-on-select="false">
+                        <ui-select-match placeholder="Selecione um ingrediente...">
+                            {{$item.ingrediente}} - {{$item.preco | currency}}
+                        </ui-select-match>
+                        <ui-select-choices 
+                            repeat="i in vm.ingredientes | orderBy: 'ingrediente' | propsFilter: {ingrediente: $select.search, preco: $select.search}">
+                            <div ng-bind-html="i.ingrediente | highlight: $select.search"></div>
+                            <small>
+                                Preço: {{i.preco | currency}}
+                            </small>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <h2 class=" text-white">Bordas</h2>
+                    <hr>
+                    <div ng-init="vm.getBordas()">
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-primary" ng-model="vm.pizza.borda.id" uib-btn-radio="{{b.id}}" ng-repeat="b in vm.bordas" ng-change="vm.getBorda()" required>
+                                {{b.borda}}
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <h2 class=" text-white">Tamanho</h2>
+                    <hr>
+                    <div>
+                        <div class="btn-group btn-group-justified">
+                            <label class="btn btn-primary" ng-model="vm.pizza.tamanho.id" uib-btn-radio="{{t.id}}" ng-repeat="t in vm.tamanhos" ng-change="vm.getTamanho()" required>
+                                {{t.tamanho}}
+                            </label>
+                            
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
+                <h2 class=" text-white">Dados do pedido</h2>
+                <div>
+                    <hr>
+                    <div class="well">
+                        <legend ng-bind="vm.sabor.sabor"></legend>
+                        <div class="list-group">
+                            <a class="list-group-item active">
+                                Ingredientes
+                            </a>
+                            <div ng-repeat="pi in vm.pizza.ingredientes">
+                                <span class="list-group-item" ng-bind="pi.ingrediente">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list-group">
+                            <a class="list-group-item active">
+                                Borda
+                            </a>
+                            <span class="list-group-item" ng-bind="vm.pizza.borda.nome || 'Sem borda'"></span>
+                            <span class="list-group-item" ng-bind="vm.pizza.preco.borda | currency "></span>
+                        </div>
+                        <div class="list-group">
+                            <a class="list-group-item active">
+                                Tamanho
+                            </a>
+                            <span class="list-group-item" ng-bind="vm.pizza.tamanho.nome || 'Sem tamanho'"></span>
+                            <span class="list-group-item" ng-bind="vm.pizza.preco.tamanho | currency"></span>
+                        </div>
+                        <div class="alert alert-dismissible alert-info" ng-if="vm.pizza.entrega">
+                            <strong>Atenção!</strong>
+                            O tempo previsto de entrega é de <strong ng-bind="vm.pizza.entrega"></strong> Minutos!
+                        </div>
+                        <h3 ng-bind="vm.pizza.preco.final | currency"></h3>
+                        <button ng-if="vm.pizza.entrega > 40" type="button" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Você ganhou 10 % de desconto porque sua entrega vai demorar um pouco." data-original-title="Tooltip on top">10% de desconto</button>
+                        <hr>
+                        <button ng-click="vm.calcularPrecoFinal()" class="btn btn-success btn-xs" ng-disabled="formPizza.$invalid">Finalizar pedido</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

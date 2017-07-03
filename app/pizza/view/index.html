@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <h1 class="page-header text-white">Sabores</h1>
+        <div class="col-sm-3 col-md-3" ng-repeat="s in vm.sabores | orderObjectBy: 'sabor':false">
+            <div class="thumbnail">
+                <img src="img/pizza.png" alt="pizza">
+                <div class="caption">
+                    <p class="both text-center text-sabor" ng-bind="s.sabor"></p>
+                    <hr>
+                    <a class="btn btn-success btn-xs center-block" href="#!/sabor/{{s.id}}">
+                        <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+                        Escolher
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
