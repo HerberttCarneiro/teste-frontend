@@ -1,0 +1,30 @@
+.text-white {
+    color: white !important;
+}
+.text-red {
+    color: #F05F40 !important;
+}
+#btn-ui-select .btn {
+    color: #ffffff;
+    background-color: #008cba;
+    border-color: #0079a1;
+}
+#btn-ui-select .btn-primary {
+    color: #fff;
+    background-color: #204d74;
+    border-color: #122b40;
+}
+#btn-ui-select .btn:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.background-red {
+    background-color: #F05F40;
+}
+.nav-custom {
+    margin-bottom: 0;border-radius: 0
+}
+.text-sabor {
+    height: 15px;
+}
